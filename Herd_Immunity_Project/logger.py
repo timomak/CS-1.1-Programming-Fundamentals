@@ -1,3 +1,5 @@
+from person import Person
+from virus import Virus
 class Logger(object):
     ''' Utility class responsible for logging all interactions during the simulation. '''
     # TODO: Write a test suite for this class to make sure each method is working
@@ -9,10 +11,10 @@ class Logger(object):
     def __init__(self, file_name):
         # TODO:  Finish this initialization method. The file_name passed should be the
         # full file name of the file that the logs will be written to.
-        self.file_name = None
+        self.file_name = file_name
 
-    def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate,
-                       basic_repro_num):
+    def write_metadata(self, pop_size, vacc_percentage, virus_name,
+                        mortality_rate, basic_repro_num):
         '''
         The simulation class should use this method immediately to log the specific
         parameters of the simulation as the first line of the file.
@@ -23,10 +25,18 @@ class Logger(object):
         # the 'a' mode to append a new log to the end, since 'w' overwrites the file.
         # NOTE: Make sure to end every line with a '/n' character to ensure that each
         # event logged ends up on a separate line!
+
+        data_log_text = "Data for the current {0} outbreak!\nPopulation Size: {1}\nVaccination Percentage: {2}\nVirus: {0}\nVirus' Mortality Rate: {3}\nBasic Reproduction Number: {4}".format(
+        virus_name, pop_size, vacc_percentage, mortality_rate, basic_repro_num)
+        data_log = open(self.file_name + ".txt", "w+")
+        data_log.write(data_log_text + "\n\n")
+        data_log.close
         pass
 
-    def log_interaction(self, person, random_person, random_person_sick=None,
-                        random_person_vacc=None, did_infect=None):
+    def log_interaction(self, person, random_person, did_infect):
+
+        # , random_person_sick=None,
+        #                     random_person_vacc=None, did_infect=None
         '''
         The Simulation object should use this method to log every interaction
         a sick person has during each time step.
@@ -40,7 +50,38 @@ class Logger(object):
         # represent all the possible edge cases. Use the values passed along with each person,
         # along with whether they are sick or vaccinated when they interact to determine
         # exactly what happened in the interaction and create a String, and write to your logfile.
-        pass
+        if did_infect == True:
+            infected = "{} infected {}.".format(
+            person._id, random_person._id
+            )
+        elif random_person.infection != None:
+            infected = "{} didn't infect {} because {}.".format(
+            person._id, random_person._id, "already sick"
+            )
+        elif random_person.is_vaccinated == True:
+            infected = "{} didn't infect {} because {}.".format(
+            person._id, random_person._id, "vaccinated"
+            )
+
+        edit_log = open(self.file_name + ".txt", "a")
+        edit_log.write(infected + "\n")
+        edit_log.close()
+
+        # if did_infect = True:
+        #     infected = "{person.ID} infected {random_person.ID}.".format(
+        #     person._id, random_person._id
+        #     )
+        # elif random_person_sick == True:
+        #     infected = "{person.ID} didn't infect {random_person.ID} because {'vaccinated' or 'already sick'}".format(
+        #     person._id, random_person._id, "already sick"
+        #     )
+        # elif random_person_vacc == True:
+        #     infected = "{} didn't infect {} because {}".format(
+        #     person._id, random_person._id, "vaccinated"
+        #     )
+        # edit_log = open(self.file_name + ".txt", "a")
+        # edit_log.write(infected)
+        # edit_log.close()
 
     def log_infection_survival(self, person, did_die_from_infection):
         ''' The Simulation object uses this method to log the results of every
@@ -52,7 +93,14 @@ class Logger(object):
         # TODO: Finish this method. If the person survives, did_die_from_infection
         # should be False.  Otherwise, did_die_from_infection should be True.
         # Append the results of the infection to the logfile
-        pass
+        if did_die_from_infection == True:
+            life_status = "{} died from infection.".format(person._id)
+        elif did_die_from_infection == False:
+            life_status = "{} survived the infection.".format(person._id)
+
+        edit_log = open(self.file_name + ".txt", "a")
+        edit_log.write(life_status + "\n")
+        edit_log.close()
 
     def log_time_step(self, time_step_number):
         ''' STRETCH CHALLENGE DETAILS:
@@ -73,3 +121,24 @@ class Logger(object):
         # new one begins.
         # NOTE: Here is an opportunity for a stretch challenge!
         pass
+
+
+def test_write_metadata():
+    new_file = Logger("test_data_log")
+    new_file.write_metadata(pop_size=1, vacc_percentage=0.3, virus_name="test", mortality_rate=0.3, basic_repro_num=100)
+    assert new_file.file_name is "test_data_log"
+
+def test_log_interaction():
+    virus = Virus("HIV", 0.8, 0.3)
+    infected_person = Person(_id=1, is_vaccinated=False, infection=virus)
+    not_vaccinated_person = Person(_id=2, is_vaccinated= True)
+    new_file = Logger("test_data_log")
+    new_file.log_interaction(person=infected_person, random_person=not_vaccinated_person, did_infect=False)
+    assert new_file.file_name is "test_data_log"
+
+def test_log_infection_survivor():
+    virus = Virus("HIV", 0.8, 0.3)
+    infected_person = Person(_id=1, is_vaccinated=False, infection=virus)
+    new_file = Logger("test_data_log")
+    new_file.log_infection_survival(infected_person, did_die_from_infection=True)
+    assert new_file.file_name is "test_data_log"

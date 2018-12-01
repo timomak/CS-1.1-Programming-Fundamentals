@@ -1,0 +1,9 @@
+Data for the current test outbreak!
+Population Size: 1
+Vaccination Percentage: 0.3
+Virus: test
+Virus' Mortality Rate: 0.3
+Basic Reproduction Number: 100
+
+1 didn't infect 2 because vaccinated.
+1 died from infection.
