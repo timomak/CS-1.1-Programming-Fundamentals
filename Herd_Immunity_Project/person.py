@@ -34,6 +34,20 @@ class Person(object):
         else:
             self.is_vaccinated = True
             return True
+            
+    def did_get_infected(self, infected_person):
+        '''Returns a boolean of whether person contracts disease from interaction '''
+        #False if not infected true if infected
+        if self.is_vaccinated == True:
+            return False
+        else: 
+            random_num = random.uniform(0, 1)
+            print(random_num)
+            if random_num <= infected_person.infection.repro_rate:
+                self.infection = infected_person.infection 
+                return True
+            else: 
+                return False
 
 
 ''' These are simple tests to ensure that you are instantiating your Person class correctly. '''
@@ -54,6 +68,9 @@ def test_not_vacc_person_instantiation():
     assert person._id is 2
     assert person.is_vaccinated is False
     assert person.is_alive is True
+
+
+
 
 
 def test_sick_person_instantiation():

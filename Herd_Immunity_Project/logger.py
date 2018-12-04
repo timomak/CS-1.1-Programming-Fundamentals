@@ -31,7 +31,7 @@ class Logger(object):
         data_log = open(self.file_name + ".txt", "w+")
         data_log.write(data_log_text + "\n\n")
         data_log.close
-        pass
+        
 
     def log_interaction(self, person, random_person, did_infect):
 
@@ -55,33 +55,18 @@ class Logger(object):
             person._id, random_person._id
             )
         elif random_person.infection != None:
-            infected = "{} didn't infect {} because {}.".format(
-            person._id, random_person._id, "already sick"
-            )
+            infected = "{} didn't infect {} because {} is already sick.".format(
+            person._id, random_person._id)
+            
         elif random_person.is_vaccinated == True:
-            infected = "{} didn't infect {} because {}.".format(
-            person._id, random_person._id, "vaccinated"
-            )
+            infected = "{} didn't infect {} because is vaccinated".format(
+            person._id, random_person._id)
+            
 
         edit_log = open(self.file_name + ".txt", "a")
         edit_log.write(infected + "\n")
         edit_log.close()
 
-        # if did_infect = True:
-        #     infected = "{person.ID} infected {random_person.ID}.".format(
-        #     person._id, random_person._id
-        #     )
-        # elif random_person_sick == True:
-        #     infected = "{person.ID} didn't infect {random_person.ID} because {'vaccinated' or 'already sick'}".format(
-        #     person._id, random_person._id, "already sick"
-        #     )
-        # elif random_person_vacc == True:
-        #     infected = "{} didn't infect {} because {}".format(
-        #     person._id, random_person._id, "vaccinated"
-        #     )
-        # edit_log = open(self.file_name + ".txt", "a")
-        # edit_log.write(infected)
-        # edit_log.close()
 
     def log_infection_survival(self, person, did_die_from_infection):
         ''' The Simulation object uses this method to log the results of every

@@ -113,16 +113,18 @@ class Simulation(object):
                 bool: True for simulation should continue, False if it should end.
         '''
         # TODO: Complete this helper method.  Returns a Boolean.
-        dead_population = 0
-        infected_population = 0
-        vaccinated_population = 0
-        for person in self.population:
-            if person.infection != None:
-                infected_population += 1
-            elif person.is_vaccinated:
-                vaccinated_population += 1
-            elif person.is_alive == False:
-                dead_population += 1
+        infected_population = sum([person for person in self.population if person.infection != None])
+        vaccinated_population = sum([person for person in self.population if person.is_vaccinated == True])
+        dead_population = sum([person for person in self.population if person.is_alive == True ])
+
+        
+        # for person in self.population:
+        #     if person.infection != None:
+        #         infected_population += 1
+        #     elif person.is_vaccinated:
+        #         vaccinated_population += 1
+        #     elif person.is_alive == False:
+        #         dead_population += 1
         if dead_population == self.pop_size:
             # print("Stop!")
             return False
@@ -174,55 +176,45 @@ class Simulation(object):
                 increment interaction counter by 1.
             '''
         # TODO: Finish this method.
-        pop = self.population
+        
 
-        for person in pop:
-            if person.infection != None:
-                pop.remove(person)
-        # for person in pop:
-        #     if person.infection != None:
-        #         print("ID: {}   is_vaccinated: {}   virus: {}".format(person._id, person.is_vaccinated, person.infection.name))
-        #     else:
-        #         print("ID: {}   is_vaccinated: {}   virus: {}".format(person._id, person.is_vaccinated, person.infection))
-        for infected_person in self.current_infected_list:
-            for person in pop:
-                if person.is_vaccinated == False:
-                    random_int = random.uniform(0.00, 1.00)
-                    print(random_int)
-                    if random_int <= infected_person.infection.repro_rate:
-                        print(infected_person.infection.repro_rate)
-                        person.infection = infected_person.infection
-                        print(person.infection.name)
-
-
-    #
-    # def interaction(self, person, random_person):
-    #     '''This method should be called any time two living people are selected for an
-    #     interaction. It assumes that only living people are passed in as parameters.
-    #
-    #     Args:
-    #         person1 (person): The initial infected person
-    #         random_person (person): The person that person1 interacts with.
-    #     '''
-    #     # Assert statements are included to make sure that only living people are passed
-    #     # in as params
-    #     assert person.is_alive == True
-    #     assert random_person.is_alive == True
-    #
-    #     # TODO: Finish this method.
-    #     #  The possible cases you'll need to cover are listed below:
-    #         # random_person is vaccinated:
-    #         #     nothing happens to random person.
-    #         # random_person is already infected:
-    #         #     nothing happens to random person.
-    #         # random_person is healthy, but unvaccinated:
-    #         #     generate a random number between 0 and 1.  If that number is smaller
-    #         #     than repro_rate, random_person's ID should be appended to
-    #         #     Simulation object's newly_infected array, so that their .infected
-    #         #     attribute can be changed to True at the end of the time step.
-    #     # TODO: Call slogger method during this method.
-    #     pass
-    #
+    
+    def interaction(self, person, random_person):
+        '''This method should be called any time two living people are selected for an
+        interaction. It assumes that only living people are passed in as parameters.
+    
+        Args:
+            person1 (person): The initial infected person
+            random_person (person): The person that person1 interacts with.
+        '''
+        # Assert statements are included to make sure that only living people are passed
+        # in as params
+        assert person.is_alive == True
+        assert random_person.is_alive == True
+    
+        # TODO: Finish this method.
+        #  The possible cases you'll need to cover are listed below:
+            # random_person is vaccinated:
+            #     nothing happens to random person.
+            # random_person is already infected:
+            #     nothing happens to random person.
+            # random_person is healthy, but unvaccinated:
+            #     generate a random number between 0 and 1.  If that number is smaller
+            #     than repro_rate, random_person's ID should be appended to
+            #     Simulation object's newly_infected array, so that their .infected
+            #     attribute can be changed to True at the end of the time step.
+        # TODO: Call logger method during this method.
+        if person.infection != None:
+            random_person.did_get_infected(person)
+            if random_person.did_get_infected(person) == True:
+                self.newly_infected.append(random_person)
+                self.logger.log_interaction(person, random_person, True)
+                print('Person Got Infected')
+            else: 
+                self.logger.log_interaction(person, random_person, False)
+                print('Person did not get infected!')
+ 
+    
     # def _infect_newly_infected(self):
     #     ''' This method should iterate through the list of ._id stored in self.newly_infected
     #     and update each Person object with the disease. '''
@@ -231,6 +223,7 @@ class Simulation(object):
     #     # to reset self.newly_infected back to an empty list.
     #     pass
     #
+
 
 if __name__ == "__main__":
     # params = sys.argv[1:]
@@ -250,5 +243,31 @@ if __name__ == "__main__":
     # sim.run()
     virus = Virus("HIV", 0.8, 0.3)
     simulation = Simulation(pop_size=10, vacc_percentage=0.5, initial_infected=1, virus=virus)
-    simulation._create_population()
-    simulation.time_step()
+    # simulation._create_population()
+    # simulation.time_step()
+    sick_person = Person(11, False, virus)
+    healthy_person = Person(12, False)
+    # healthy_person.did_get_infected(sick_person)
+    simulation.interaction(sick_person, healthy_person)
+
+def test_simulation_should_continue():
+    """Tests the simulation should continue method """
+    virus = Virus("HIV", 0.8, 0.3)
+    simulation = Simulation(pop_size=10, vacc_percentage=0.5, initial_infected=1, virus=virus)
+    simulation_continues = simulation._simulation_should_continue()
+    assert simulation_continues is True 
+
+
+def test_interaction():
+    '''Tests the interaction function  '''
+    virus = Virus("HIV", 0.8, 0.3)
+    simulation = Simulation(pop_size=10, vacc_percentage=0.5, initial_infected=1, virus=virus)
+    sick_person = Person(11, False, virus)
+    healthy_person = Person(12, False)
+    simulation.interaction(sick_person, healthy_person)
+    
+    
+    
+    
+    
+    
