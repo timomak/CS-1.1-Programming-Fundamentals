@@ -117,7 +117,7 @@ class Simulation(object):
         vaccinated_population = sum([person for person in self.population if person.is_vaccinated == True])
         dead_population = sum([person for person in self.population if person.is_alive == True ])
 
-        
+
         # for person in self.population:
         #     if person.infection != None:
         #         infected_population += 1
@@ -176,13 +176,13 @@ class Simulation(object):
                 increment interaction counter by 1.
             '''
         # TODO: Finish this method.
-        
 
-    
+
+
     def interaction(self, person, random_person):
         '''This method should be called any time two living people are selected for an
         interaction. It assumes that only living people are passed in as parameters.
-    
+
         Args:
             person1 (person): The initial infected person
             random_person (person): The person that person1 interacts with.
@@ -191,7 +191,7 @@ class Simulation(object):
         # in as params
         assert person.is_alive == True
         assert random_person.is_alive == True
-    
+
         # TODO: Finish this method.
         #  The possible cases you'll need to cover are listed below:
             # random_person is vaccinated:
@@ -210,11 +210,10 @@ class Simulation(object):
                 self.newly_infected.append(random_person)
                 self.logger.log_interaction(person, random_person, True)
                 print('Person Got Infected')
-            else: 
+            else:
                 self.logger.log_interaction(person, random_person, False)
                 print('Person did not get infected!')
- 
-    
+
     # def _infect_newly_infected(self):
     #     ''' This method should iterate through the list of ._id stored in self.newly_infected
     #     and update each Person object with the disease. '''
@@ -255,7 +254,7 @@ def test_simulation_should_continue():
     virus = Virus("HIV", 0.8, 0.3)
     simulation = Simulation(pop_size=10, vacc_percentage=0.5, initial_infected=1, virus=virus)
     simulation_continues = simulation._simulation_should_continue()
-    assert simulation_continues is True 
+    assert simulation_continues is True
 
 
 def test_interaction():
@@ -265,9 +264,3 @@ def test_interaction():
     sick_person = Person(11, False, virus)
     healthy_person = Person(12, False)
     simulation.interaction(sick_person, healthy_person)
-    
-    
-    
-    
-    
-    
