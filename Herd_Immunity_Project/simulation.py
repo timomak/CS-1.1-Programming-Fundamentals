@@ -215,14 +215,18 @@ class Simulation(object):
                 print('Person did not get infected!')
  
     
-    # def _infect_newly_infected(self):
-    #     ''' This method should iterate through the list of ._id stored in self.newly_infected
-    #     and update each Person object with the disease. '''
-    #     # TODO: Call this method at the end of every time step and infect each Person.
-    #     # TODO: Once you have iterated through the entire list of self.newly_infected, remember
-    #     # to reset self.newly_infected back to an empty list.
-    #     pass
-    #
+    def _infect_newly_infected(self):
+        ''' This method should iterate through the list of ._id stored in self.newly_infected
+        and update each Person object with the disease. '''
+        # TODO: Call this method at the end of every time step and infect each Person.
+        # TODO: Once you have iterated through the entire list of self.newly_infected, remember
+        # to reset self.newly_infected back to an empty list.
+        for i in self.newly_infected:
+            i.infection = self.virus
+        return self.newly_infected = []
+        
+            
+    
 
 
 if __name__ == "__main__":
