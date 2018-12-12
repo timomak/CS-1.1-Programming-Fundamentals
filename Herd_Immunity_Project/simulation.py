@@ -152,9 +152,10 @@ class Simulation(object):
         # TODO: Set this variable using a helper
         time_step_counter = 0
         should_continue = self._simulation_should_continue()
-        if should_continue == True:
+        if should_continue:
+            self.time_step()
             time_step_counter += 1
-            # Logger.log_time_step()
+            self.logger.log_time_step(time_step_counter, self.total_dead, self.newly_infected, self.total_infected)
 
         # while should_continue:
         # TODO: for every iteration of this loop, call self.time_step() to compute another
@@ -233,7 +234,7 @@ class Simulation(object):
         # to reset self.newly_infected back to an empty list.
         for i in self.newly_infected:
             i.infection = self.virus
-        return self.newly_infected = []
+        self.newly_infected = []
         
             
     
@@ -257,12 +258,12 @@ if __name__ == "__main__":
     # sim.run()
     virus = Virus("HIV", 0.8, 0.3)
     simulation = Simulation(pop_size=10, vacc_percentage=0.5, initial_infected=1, virus=virus)
-    # simulation._create_population()
-    # simulation.time_step()
+    simulation._create_population()
+    simulation.time_step()
     sick_person = Person(11, False, virus)
-    healthy_person = Person(12, False)
+    # healthy_person = Person(12, False)
     # healthy_person.did_get_infected(sick_person)
-    simulation.interaction(sick_person, healthy_person)
+    # simulation.interaction(sick_person, healthy_person)
 
 def test_simulation_should_continue():
     """Tests the simulation should continue method """
@@ -270,6 +271,12 @@ def test_simulation_should_continue():
     simulation = Simulation(pop_size=10, vacc_percentage=0.5, initial_infected=1, virus=virus)
     simulation_continues = simulation._simulation_should_continue()
     assert simulation_continues is True 
+
+def test_time_step():
+    """ Tests whether the time step method works"""
+    virus = Virus("HIV", 0.8, 0.3)
+    simulation = Simulation(pop_size=10, vacc_percentage=0.5, initial_infected=1, virus=virus)
+    simulation.run()    
 
 
 def test_interaction():

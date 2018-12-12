@@ -5,5 +5,5 @@ Virus: test
 Virus' Mortality Rate: 0.3
 Basic Reproduction Number: 100
 
-1 didn't infect 2 because vaccinated.
+1 didn't infect 2 because is vaccinated
 1 died from infection.

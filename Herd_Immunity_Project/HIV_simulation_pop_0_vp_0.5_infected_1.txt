@@ -1,0 +1,1 @@
+End of Time Step #1. There were [] people infected. Now there is 0 total people infected. The total number of deaths has rose to 0

@@ -1,5 +1,6 @@
 from person import Person
 from virus import Virus
+
 class Logger(object):
     ''' Utility class responsible for logging all interactions during the simulation. '''
     # TODO: Write a test suite for this class to make sure each method is working
@@ -87,7 +88,7 @@ class Logger(object):
         edit_log.write(life_status + "\n")
         edit_log.close()
 
-    def log_time_step(self, total_dead, time_step_number):
+    def log_time_step(self, time_step_number, total_dead, newly_infected, total_infected):
         ''' STRETCH CHALLENGE DETAILS:
 
         If you choose to extend this method, the format of the summary statistics logged
@@ -105,8 +106,9 @@ class Logger(object):
         # TODO: Finish this method. This method should log when a time step ends, and a
         # new one begins.
         # NOTE: Here is an opportunity for a stretch challenge!
-        log = "End of Time Step #{}. There were {} people infected and {} who died. Now there is {} total people infected. The total number of deaths has rose to {}".format(time_step_number, )
-
+        log = "End of Time Step #{}. There were {} people infected. Now there is {} total people infected. The total number of deaths has rose to {}".format(time_step_number, newly_infected, total_infected, total_dead)
+        with open(self.file_name, 'a') as out:
+            out.write(log)
 
 def test_write_metadata():
     new_file = Logger("test_data_log")
