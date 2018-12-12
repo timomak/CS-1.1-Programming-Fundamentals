@@ -106,7 +106,7 @@ class Logger(object):
         # TODO: Finish this method. This method should log when a time step ends, and a
         # new one begins.
         # NOTE: Here is an opportunity for a stretch challenge!
-        log = "End of Time Step #{}. There were {} people infected. Now there is {} total people infected. The total number of deaths has rose to {}".format(time_step_number, newly_infected, total_infected, total_dead)
+        log = "End of Time Step #{}. There were {} people infected. Now there is {} total people infected. The total number of deaths has rose to {}\n".format(time_step_number, len(newly_infected), total_infected, total_dead)
         with open(self.file_name, 'a') as out:
             out.write(log)
 
