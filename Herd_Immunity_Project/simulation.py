@@ -176,6 +176,16 @@ class Simulation(object):
                 increment interaction counter by 1.
             '''
         # TODO: Finish this method.
+        counter = 0
+        infected_peoples = [p for p in self.population if p.infection != None]
+        healthy_peoples = [p for p in self.population if p.infection == None]
+
+
+        for _ in range(100):
+            for infected_person in infected_peoples:
+                victim = random.choice(healthy_peoples)
+                self.interaction(infected_person, victim)
+                
         
 
     
