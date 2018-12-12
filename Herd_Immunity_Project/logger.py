@@ -29,13 +29,12 @@ class Logger(object):
 
         data_log_text = "Data for the current {0} outbreak!\nPopulation Size: {1}\nVaccination Percentage: {2}\nVirus: {0}\nVirus' Mortality Rate: {3}\nBasic Reproduction Number: {4}".format(
         virus_name, pop_size, vacc_percentage, mortality_rate, basic_repro_num)
-        data_log = open(self.file_name + ".txt", "w+")
-        data_log.write(data_log_text + "\n\n")
-        data_log.close
-        
+        print(self.file_name)
+        with open(self.file_name, "a+") as out:
+            out.write(data_log_text + "\n\n")
+
 
     def log_interaction(self, person, random_person, did_infect):
-
         # , random_person_sick=None,
         #                     random_person_vacc=None, did_infect=None
         '''
@@ -55,18 +54,18 @@ class Logger(object):
             infected = "{} infected {}.".format(
             person._id, random_person._id
             )
+
         elif random_person.infection != None:
             infected = "{} didn't infect {} because {} is already sick.".format(
             person._id, random_person._id)
-            
+
         elif random_person.is_vaccinated == True:
             infected = "{} didn't infect {} because is vaccinated".format(
             person._id, random_person._id)
-            
 
-        edit_log = open(self.file_name + ".txt", "a")
-        edit_log.write(infected + "\n")
-        edit_log.close()
+
+        with open(self.file_name, 'a+') as out:
+            out.write(infected + '\n')
 
 
     def log_infection_survival(self, person, did_die_from_infection):
@@ -84,9 +83,9 @@ class Logger(object):
         elif did_die_from_infection == False:
             life_status = "{} survived the infection.".format(person._id)
 
-        edit_log = open(self.file_name + ".txt", "a")
-        edit_log.write(life_status + "\n")
-        edit_log.close()
+        with open(self.file_name, "a") as out:
+            out.write(life_status + "\n")
+
 
     def log_time_step(self, time_step_number, total_dead, newly_infected, total_infected):
         ''' STRETCH CHALLENGE DETAILS:
@@ -107,7 +106,7 @@ class Logger(object):
         # new one begins.
         # NOTE: Here is an opportunity for a stretch challenge!
         log = "End of Time Step #{}. There were {} people infected. Now there is {} total people infected. The total number of deaths has rose to {}\n".format(time_step_number, len(newly_infected), total_infected, total_dead)
-        with open(self.file_name, 'a') as out:
+        with open(self.file_name, 'a+') as out:
             out.write(log)
 
 def test_write_metadata():
