@@ -110,21 +110,26 @@ class Logger(object):
             out.write(log)
 
 def test_write_metadata():
-    new_file = Logger("test_data_log")
+    new_file = Logger("test_data_log.txt")
     new_file.write_metadata(pop_size=1, vacc_percentage=0.3, virus_name="test", mortality_rate=0.3, basic_repro_num=100)
-    assert new_file.file_name is "test_data_log"
+    assert new_file.file_name is "test_data_log.txt"
 
 def test_log_interaction():
     virus = Virus("HIV", 0.8, 0.3)
     infected_person = Person(_id=1, is_vaccinated=False, infection=virus)
     not_vaccinated_person = Person(_id=2, is_vaccinated= True)
-    new_file = Logger("test_data_log")
+    new_file = Logger("test_data_log.txt")
     new_file.log_interaction(person=infected_person, random_person=not_vaccinated_person, did_infect=False)
-    assert new_file.file_name is "test_data_log"
+    assert new_file.file_name is "test_data_log.txt"
 
 def test_log_infection_survivor():
     virus = Virus("HIV", 0.8, 0.3)
     infected_person = Person(_id=1, is_vaccinated=False, infection=virus)
-    new_file = Logger("test_data_log")
+    new_file = Logger("test_data_log.txt")
     new_file.log_infection_survival(infected_person, did_die_from_infection=True)
-    assert new_file.file_name is "test_data_log"
+    assert new_file.file_name is "test_data_log.txt"
+
+def test_log_time_step():
+    new_file = Logger("test_data_log.txt")
+    new_file.log_time_step(time_step_number=1, total_dead=2, newly_infected=[1,2,3,4], total_infected=4)
+    assert new_file.file_name is "test_data_log.txt"
