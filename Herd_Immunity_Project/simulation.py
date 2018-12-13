@@ -186,8 +186,8 @@ class Simulation(object):
             '''
         # TODO: Finish this method.
         # counter = 0
-        infected_peoples = [p for p in self.population if p.infection != None]
-        healthy_peoples = [p for p in self.population if p.infection == None]
+        infected_peoples = [p for p in self.population if p.infection != None and p.is_alive == True]
+        healthy_peoples = [p for p in self.population if p.infection == None and p.is_alive == True]
         print(healthy_peoples)
         for _ in range(5):
             for infected_person in infected_peoples:
@@ -245,7 +245,9 @@ class Simulation(object):
             self.total_infected += 1
             if i.did_survive_infection() == False:
                 self.total_dead += 1
+                print("Total dead: {}".format(self.total_dead))
                 self.pop_size -= 1
+                print("Total population: {}".format(self.pop_size))
             else:
                 i.is_vaccinated = True
 
