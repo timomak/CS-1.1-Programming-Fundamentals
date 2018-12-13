@@ -56,7 +56,7 @@ class Logger(object):
             )
 
         elif random_person.infection != None:
-            infected = "{} didn't infect {} because {} is already sick.".format(
+            infected = "{} didn't infect {} because the person is already sick.".format(
             person._id, random_person._id)
 
         elif random_person.is_vaccinated == True:
@@ -65,7 +65,7 @@ class Logger(object):
 
 
         with open(self.file_name, 'a+') as out:
-            out.write(infected + '\n')
+            out.write("{} infected {}.".format( person._id, random_person._id) + '\n')
 
 
     def log_infection_survival(self, person, did_die_from_infection):
