@@ -53,6 +53,7 @@ class Simulation(object):
             virus.name, len(self.population), self.vacc_percentage, self.initial_infected)
         self.logger = Logger(file_name=self.file_name)
         self.newly_infected = []
+        self.should_continue_running = True
 
     def _create_population(self):
         '''This method will create the initial population.
@@ -83,7 +84,6 @@ class Simulation(object):
             self.next_person_id += 1
 
         # print("Infected population: {}".format(len(self.current_infected_list)))
-
         vaccinated_population = list()
         vaccinated_population_number = (round(self.pop_size * self.vacc_percentage, 0)) - 1
 
@@ -133,6 +133,10 @@ class Simulation(object):
         elif len(infected_population) == self.pop_size:
             # print("Stop!")
             return False
+        elif len(vaccinated_population) + len(infected_population) == self.pop_size:
+            return False
+        elif len(self.population) == 0:
+            return False
         else:
             # print("Continue!")
             return True
@@ -155,7 +159,7 @@ class Simulation(object):
         time_step_counter = 0
         should_continue = self._simulation_should_continue()
         print("Should similation continue? Bot: {}".format(should_continue))
-        while should_continue:
+        while should_continue == True and self.should_continue_running == True:
 
             self.time_step()
             time_step_counter += 1
@@ -191,25 +195,45 @@ class Simulation(object):
 
         for infected_person in infected_peoples:
             for _ in range(5):
-                counter +=1
-                print(counter)
-                random_person = self.get_alive_random_person_from_population_that_is_not_the_person_that_is_interacting(infected_person)
-                if random_person.is_alive == True:
-                    self.interaction(infected_person, random_person)
-                else:
-                    print("random_person is not alive")
+                healthy_people = [ p for p in self.population if p.infection == None ]
 
+                if len(self.population) == 0:
+                    print("It should stop")
+                    self.should_continue_running = False
+                    return
+                elif len(healthy_people) == 0:
+                    print('It should stop because no healthy people')
+                    self.should_continue_running = False
+                    return
+
+                counter +=1
+                print("Population size: ",len(self.population))
+                random_person = self.get_alive_random_person_from_population_that_is_not_the_person_that_is_interacting(infected_person)
+                # if random_person.is_alive == True:
+                self.interaction(infected_person, random_person)
+                # else:
+                #     print("random_person is not alive")
+        self._infect_newly_infected()
         print("Number of infected people after time step: {}".format(len(self.current_infected_list)))
 
     def get_alive_random_person_from_population_that_is_not_the_person_that_is_interacting(self, interacting_infected_person):
-        random_person = random.choice(self.population)
+        healthy_people = [p for  p in self.population if p.infection == None and p.is_alive == True]
+        # if len(self.population) == 0:
+        #     self._simulation_should_continue()
+        #     # stop simulation
+        # elif len(healthy_people) == 0:
+        #     return self._simulation_should_continue()
+
+
+        random_person = random.choice(healthy_people)
+        print("Ran Id",random_person._id)
         # print("random person id",random_person._id)
         # print("Is random person alive? Bot: {}".format(random_person.is_alive))
         if random_person == interacting_infected_person or random_person.is_alive == False:
-            # print("Random person is dead, need to look for a new one!")
+            print("Random person is dead, need to look for a new one!", random_person.is_alive)
             self.get_alive_random_person_from_population_that_is_not_the_person_that_is_interacting(interacting_infected_person)
-        elif random_person.is_alive == True:
-            # print("random person {} is alive: {}".format(random_person._id, random_person.is_alive))
+        elif random_person.is_alive == True and random_person != interacting_infected_person:
+            print("random person {} is alive: {}".format(random_person._id, random_person.is_alive))
             return random_person
         else:
             self.get_alive_random_person_from_population_that_is_not_the_person_that_is_interacting(interacting_infected_person)
@@ -225,8 +249,8 @@ class Simulation(object):
         '''
         # Assert statements are included to make sure that only living people are passed
         # in as params
-        assert person.is_alive == True
-        assert random_person.is_alive == True
+        # assert person.is_alive == True
+        # assert random_person.is_alive == True
 
         # TODO: Finish this method.
         #  The possible cases you'll need to cover are listed below:
@@ -255,25 +279,23 @@ class Simulation(object):
             print("Person {} did not infect because he is not sick".format(person._id))
 
     # No need because we do that in person.py
-    # def _infect_newly_infected(self):
-    #     ''' This method should iterate through the list of ._id stored in self.newly_infected
-    #     and update each Person object with the disease. '''
-    #     # TODO: Call this method at the end of every time step and infect each Person.
-    #     # TODO: Once you have iterated through the entire list of self.newly_infected, remember
-    #     # to reset self.newly_infected back to an empty list.
-    #     for i in self.newly_infected:
-    #         i.infection = self.virus
-    #         self.total_infected += 1
-    #         if i.did_survive_infection() == False:
-    #             self.total_dead += 1
-    #             self.population.remove(i)
-    #
-    #         else:
-    #             i.is_vaccinated = True
-    #
-    #
-    #
-    #     self.newly_infected = []
+    def _infect_newly_infected(self):
+        ''' This method should iterate through the list of ._id stored in self.newly_infected
+        and update each Person object with the disease. '''
+        # TODO: Call this method at the end of every time step and infect each Person.
+        # TODO: Once you have iterated through the entire list of self.newly_infected, remember
+        # to reset self.newly_infected back to an empty list.
+        for i in self.newly_infected:
+            self.total_infected += 1
+            self.current_infected_list.append(i)
+            if i.did_survive_infection() == False:
+                self.total_dead += 1
+                print('Dead Pop: {}'.format(self.total_dead))
+                self.population.remove(i)
+            else:
+                i.is_vaccinated = True
+
+        self.newly_infected = []
 
 
 
@@ -319,20 +341,20 @@ def test_simulation_should_continue():
     assert len(simulation.current_infected_list) == 1
     assert simulation.total_dead == 0
 
-# def test_run():
+def test_run():
+    virus = Virus("HIV", 0.8, 1)
+    simulation = Simulation(pop_size=10, vacc_percentage=0.5, initial_infected=1, virus=virus)
+    simulation.run()
+    assert simulation.total_dead == 100
+
+# def test_time_step():
+#     """ Tests whether the time step method works"""
 #     virus = Virus("HIV", 0.8, 0.3)
 #     simulation = Simulation(pop_size=10, vacc_percentage=0.5, initial_infected=1, virus=virus)
-#     simulation.run()
-#     assert simulation.total_dead == 100
-
-def test_time_step():
-    """ Tests whether the time step method works"""
-    virus = Virus("HIV", 0.8, 0.3)
-    simulation = Simulation(pop_size=10, vacc_percentage=0.5, initial_infected=1, virus=virus)
-    # simulation.run()
-    simulation._create_population()
-    simulation.time_step()
-    assert simulation.pop_size == 20
+#     # simulation.run()
+#     simulation._create_population()
+#     simulation.time_step()
+#     assert simulation.pop_size == 20
 
 def test_get_alive_random_person():
     """ Tests whether the time step method works"""
