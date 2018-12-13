@@ -98,12 +98,7 @@ class Simulation(object):
             self.population.append(new_person)
             self.next_person_id +=1
 
-        # for person in self.population:
-        #     if person.infection != None:
-        #         print("ID: {}   is_vaccinated: {}   virus: {}".format(person._id, person.is_vaccinated, person.infection.name))
-        #     else:
-        #         print("ID: {}   is_vaccinated: {}   virus: {}".format(person._id, person.is_vaccinated, person.infection))
-
+    
 
     def _simulation_should_continue(self):
         ''' The simulation should only end if the entire population is dead
@@ -187,11 +182,10 @@ class Simulation(object):
         # TODO: Finish this method.
         # counter = 0
         infected_peoples = [p for p in self.population if p.infection != None]
-        healthy_peoples = [p for p in self.population if p.infection == None]
-        print(healthy_peoples)
+        # healthy_peoples = [p for p in self.population if p.infection == None]
         for _ in range(5):
             for infected_person in infected_peoples:
-                random_person = random.choice(healthy_peoples)
+                random_person = random.choice(self.population)
                 self.interaction(infected_person, random_person)
                 self._infect_newly_infected()
 
@@ -208,8 +202,8 @@ class Simulation(object):
         '''
         # Assert statements are included to make sure that only living people are passed
         # in as params
-        assert person.is_alive == True
-        assert random_person.is_alive == True
+        # assert person.is_alive == True
+        # assert random_person.is_alive == True
 
         # TODO: Finish this method.
         #  The possible cases you'll need to cover are listed below:
@@ -240,14 +234,15 @@ class Simulation(object):
         # TODO: Call this method at the end of every time step and infect each Person.
         # TODO: Once you have iterated through the entire list of self.newly_infected, remember
         # to reset self.newly_infected back to an empty list.
-        for i in self.newly_infected:
-            i.infection = self.virus
+        for i in range(len(self.newly_infected) - 1):
+            self.newly_infected[i].infection = self.virus
             self.total_infected += 1
-            if i.did_survive_infection() == False:
+            if self.newly_infected[i].did_survive_infection() == False:
                 self.total_dead += 1
-                self.pop_size -= 1
+                self.population.pop(i)
+                
             else:
-                i.is_vaccinated = True
+                self.newly_infected[i].is_vaccinated = True
 
 
 

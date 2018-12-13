@@ -1,0 +1,430 @@
+Data for the current sample_virus outbreak!
+Population Size: 100
+Vaccination Percentage: 0.7
+Virus: sample_virus
+Virus' Mortality Rate: 0.25
+Basic Reproduction Number: 0.4
+
+Data for the current sample_virus outbreak!
+Population Size: 100
+Vaccination Percentage: 0.7
+Virus: sample_virus
+Virus' Mortality Rate: 0.25
+Basic Reproduction Number: 0.4
+
+0 didn't infect 91 because the person is already sick.
+1 didn't infect 41 because is vaccinated
+2 didn't infect 38 because is vaccinated
+3 didn't infect 27 because is vaccinated
+4 didn't infect 104 because the person is already sick.
+5 didn't infect 79 because is vaccinated
+6 didn't infect 21 because is vaccinated
+7 infected 85.
+8 didn't infect 74 because is vaccinated
+9 didn't infect 81 because the person is already sick.
+0 didn't infect 38 because is vaccinated
+1 didn't infect 45 because is vaccinated
+2 didn't infect 10 because is vaccinated
+3 didn't infect 30 because is vaccinated
+4 didn't infect 53 because is vaccinated
+5 didn't infect 37 because is vaccinated
+6 didn't infect 53 because is vaccinated
+7 didn't infect 58 because is vaccinated
+8 didn't infect 54 because is vaccinated
+9 didn't infect 15 because is vaccinated
+0 didn't infect 78 because is vaccinated
+1 didn't infect 58 because is vaccinated
+2 didn't infect 47 because is vaccinated
+3 infected 89.
+4 infected 94.
+5 didn't infect 45 because is vaccinated
+6 didn't infect 55 because is vaccinated
+7 didn't infect 92 because the person is already sick.
+8 didn't infect 44 because is vaccinated
+9 didn't infect 97 because the person is already sick.
+0 didn't infect 61 because is vaccinated
+1 didn't infect 101 because the person is already sick.
+2 didn't infect 43 because is vaccinated
+Data for the current sample_virus outbreak!
+Population Size: 100
+Vaccination Percentage: 0.7
+Virus: sample_virus
+Virus' Mortality Rate: 0.25
+Basic Reproduction Number: 0.4
+
+0 infected 91.
+1 infected 41.
+2 infected 38.
+3 infected 27.
+4 infected 104.
+5 infected 79.
+6 infected 21.
+7 infected 85.
+8 infected 74.
+9 infected 81.
+0 infected 38.
+1 infected 45.
+2 infected 10.
+3 infected 30.
+4 infected 53.
+5 infected 37.
+6 infected 53.
+7 infected 58.
+8 infected 54.
+9 infected 15.
+0 infected 78.
+1 infected 58.
+2 infected 47.
+3 infected 89.
+4 infected 94.
+5 infected 45.
+6 infected 55.
+7 infected 92.
+8 infected 44.
+9 infected 97.
+0 infected 61.
+1 infected 101.
+2 infected 43.
+3 infected 105.
+4 infected 75.
+5 infected 29.
+6 infected 18.
+7 infected 42.
+8 infected 102.
+9 infected 47.
+0 infected 102.
+1 infected 48.
+2 infected 57.
+3 infected 77.
+4 infected 24.
+5 infected 49.
+6 infected 20.
+7 infected 107.
+8 infected 87.
+9 infected 93.
+End of Time Step #1. There were 5 people infected. Now there is 111 total people infected. The total number of deaths has rose to 29
+0 infected 88.
+1 infected 108.
+2 infected 22.
+3 infected 103.
+4 infected 45.
+5 infected 105.
+6 infected 61.
+7 infected 46.
+8 infected 47.
+9 infected 71.
+81 infected 90.
+Data for the current sample_virus outbreak!
+Population Size: 100
+Vaccination Percentage: 0.7
+Virus: sample_virus
+Virus' Mortality Rate: 0.25
+Basic Reproduction Number: 0.4
+
+0 infected 91.
+1 infected 41.
+2 infected 38.
+3 infected 27.
+4 infected 104.
+5 infected 79.
+6 infected 21.
+7 infected 85.
+8 infected 74.
+9 infected 81.
+0 infected 38.
+1 infected 45.
+2 infected 10.
+3 infected 30.
+4 infected 53.
+5 infected 37.
+6 infected 53.
+Data for the current sample_virus outbreak!
+Population Size: 100
+Vaccination Percentage: 0.7
+Virus: sample_virus
+Virus' Mortality Rate: 0.25
+Basic Reproduction Number: 0.4
+
+0 infected 91.
+1 infected 41.
+2 infected 38.
+3 infected 27.
+4 infected 104.
+5 infected 79.
+6 infected 21.
+7 infected 85.
+8 infected 74.
+9 infected 81.
+0 infected 38.
+1 infected 45.
+2 infected 10.
+3 infected 30.
+4 infected 53.
+5 infected 37.
+6 infected 53.
+Data for the current sample_virus outbreak!
+Population Size: 100
+Vaccination Percentage: 0.7
+Virus: sample_virus
+Virus' Mortality Rate: 0.25
+Basic Reproduction Number: 0.4
+
+0 infected 91.
+1 infected 41.
+2 infected 38.
+3 infected 27.
+4 infected 104.
+5 infected 79.
+6 infected 21.
+7 infected 85.
+Data for the current sample_virus outbreak!
+Population Size: 100
+Vaccination Percentage: 0.7
+Virus: sample_virus
+Virus' Mortality Rate: 0.25
+Basic Reproduction Number: 0.4
+
+0 infected 91.
+1 infected 41.
+2 infected 38.
+3 infected 27.
+4 infected 104.
+5 infected 79.
+6 infected 21.
+7 infected 85.
+8 infected 74.
+Data for the current sample_virus outbreak!
+Population Size: 100
+Vaccination Percentage: 0.7
+Virus: sample_virus
+Virus' Mortality Rate: 0.25
+Basic Reproduction Number: 0.4
+
+0 infected 91.
+1 infected 41.
+2 infected 38.
+3 infected 27.
+4 infected 104.
+5 infected 79.
+6 infected 21.
+7 infected 85.
+8 infected 74.
+9 infected 81.
+0 infected 38.
+1 infected 45.
+2 infected 10.
+3 infected 30.
+4 infected 53.
+5 infected 37.
+6 infected 53.
+7 infected 58.
+8 infected 54.
+9 infected 15.
+0 infected 78.
+1 infected 58.
+2 infected 47.
+3 infected 89.
+4 infected 94.
+5 infected 45.
+6 infected 55.
+7 infected 92.
+8 infected 44.
+9 infected 97.
+0 infected 61.
+1 infected 101.
+2 infected 43.
+3 infected 105.
+4 infected 75.
+5 infected 29.
+6 infected 18.
+7 infected 42.
+8 infected 102.
+9 infected 47.
+0 infected 102.
+1 infected 48.
+2 infected 57.
+3 infected 77.
+4 infected 24.
+5 infected 49.
+6 infected 20.
+7 infected 107.
+8 infected 87.
+9 infected 93.
+End of Time Step #1. There were 5 people infected. Now there is 111 total people infected. The total number of deaths has rose to 29
+81 infected 57.
+Data for the current sample_virus outbreak!
+Population Size: 100
+Vaccination Percentage: 0.7
+Virus: sample_virus
+Virus' Mortality Rate: 0.25
+Basic Reproduction Number: 0.4
+
+0 infected 81.
+1 infected 31.
+2 infected 28.
+3 infected 17.
+4 infected 94.
+5 infected 69.
+6 infected 11.
+7 infected 75.
+8 infected 54.
+9 infected 4.
+0 infected 3.
+1 infected 53.
+2 infected 76.
+3 infected 1.
+Data for the current sample_virus outbreak!
+Population Size: 100
+Vaccination Percentage: 0.7
+Virus: sample_virus
+Virus' Mortality Rate: 0.25
+Basic Reproduction Number: 0.4
+
+0 infected 81.
+1 infected 31.
+2 infected 28.
+3 infected 17.
+4 infected 94.
+5 infected 69.
+6 infected 11.
+7 infected 75.
+8 infected 54.
+9 infected 4.
+0 infected 3.
+1 infected 53.
+2 infected 76.
+3 infected 1.
+4 infected 28.
+5 infected 12.
+6 infected 45.
+7 infected 94.
+8 infected 82.
+9 infected 32.
+0 infected 15.
+1 infected 23.
+2 infected 91.
+3 infected 54.
+4 infected 34.
+5 infected 35.
+6 infected 14.
+7 infected 47.
+8 infected 90.
+9 infected 83.
+0 infected 92.
+1 infected 82.
+2 infected 68.
+3 infected 79.
+4 infected 36.
+5 infected 64.
+6 infected 29.
+7 infected 90.
+8 infected 109.
+9 infected 98.
+0 infected 62.
+1 infected 81.
+2 infected 73.
+3 infected 43.
+4 infected 65.
+5 infected 96.
+6 infected 48.
+7 infected 67.
+8 infected 51.
+9 infected 91.
+End of Time Step #1. There were 8 people infected. Now there is 204 total people infected. The total number of deaths has rose to 51
+81 infected 59.
+82 infected 103.
+83 infected 93.
+90 infected 65.
+92 infected 82.
+94 infected 67.
+96 infected 92.
+109 infected 81.
+81 infected 87.
+82 infected 94.
+83 infected 107.
+90 infected 101.
+92 infected 90.
+94 infected 73.
+96 infected 98.
+109 infected 76.
+81 infected 103.
+82 infected 102.
+83 infected 76.
+90 infected 73.
+92 infected 101.
+94 infected 73.
+96 infected 102.
+Data for the current sample_virus outbreak!
+Population Size: 100
+Vaccination Percentage: 0.7
+Virus: sample_virus
+Virus' Mortality Rate: 0.25
+Basic Reproduction Number: 0.4
+
+0 infected 81.
+1 infected 31.
+2 infected 28.
+3 infected 17.
+4 infected 94.
+5 infected 69.
+6 infected 11.
+7 infected 75.
+8 infected 54.
+9 infected 4.
+0 infected 64.
+1 infected 77.
+2 infected 3.
+3 infected 89.
+4 infected 103.
+5 infected 55.
+6 infected 20.
+7 infected 99.
+8 infected 80.
+9 infected 14.
+0 infected 50.
+1 infected 34.
+2 infected 17.
+3 infected 25.
+4 infected 93.
+5 infected 56.
+6 infected 36.
+7 infected 37.
+8 infected 16.
+9 infected 49.
+0 infected 92.
+1 infected 85.
+2 infected 94.
+3 infected 84.
+4 infected 70.
+5 infected 81.
+6 infected 85.
+7 infected 58.
+8 infected 90.
+9 infected 48.
+0 infected 32.
+1 infected 31.
+2 infected 105.
+3 infected 46.
+4 infected 98.
+5 infected 70.
+6 infected 101.
+7 infected 53.
+8 infected 60.
+9 infected 56.
+End of Time Step #1. There were 9 people infected. Now there is 188 total people infected. The total number of deaths has rose to 54
+80 infected 96.
+81 infected 64.
+84 infected 108.
+85 infected 98.
+89 infected 70.
+90 infected 87.
+92 infected 94.
+94 infected 87.
+98 infected 98.
+99 infected 97.
+101 infected 98.
+105 infected 104.
+80 infected 103.
+81 infected 94.
+84 infected 87.
+85 infected 100.
