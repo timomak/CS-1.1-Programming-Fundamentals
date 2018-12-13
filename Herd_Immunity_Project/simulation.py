@@ -159,7 +159,7 @@ class Simulation(object):
             # print(self.total_dead)
 
             self.logger.log_time_step(time_step_counter, self.total_dead, self.newly_infected, self.total_infected)
-
+            should_continue = self._simulation_should_continue()
         # while should_continue:
         # TODO: for every iteration of this loop, call self.time_step() to compute another
         # round of this simulation.
@@ -183,7 +183,7 @@ class Simulation(object):
         # counter = 0
         infected_peoples = [p for p in self.population if p.infection != None]
         # healthy_peoples = [p for p in self.population if p.infection == None]
-        for _ in range(5):
+        for _ in range(100):
             for infected_person in infected_peoples:
                 random_person = random.choice(self.population)
                 self.interaction(infected_person, random_person)
@@ -234,19 +234,19 @@ class Simulation(object):
         # TODO: Call this method at the end of every time step and infect each Person.
         # TODO: Once you have iterated through the entire list of self.newly_infected, remember
         # to reset self.newly_infected back to an empty list.
-        for i in range(len(self.newly_infected) - 1):
-            self.newly_infected[i].infection = self.virus
+        for i in self.newly_infected:
+            i.infection = self.virus
             self.total_infected += 1
-            if self.newly_infected[i].did_survive_infection() == False:
+            if i.did_survive_infection() == False:
                 self.total_dead += 1
-                self.population.pop(i)
+                self.population.remove(i)
                 
             else:
-                self.newly_infected[i].is_vaccinated = True
+                i.is_vaccinated = True
 
 
 
-        # self.newly_infected = []
+        self.newly_infected = []
 
 
 
